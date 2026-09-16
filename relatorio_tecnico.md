@@ -6,7 +6,8 @@
 **Docentes:** Prof. Pedro Henrique Flores e Prof. Osmar Dias Jr.  
 **Estudante:** João Paulo Andrade  
 **RU:** 5180040  
-**Curso:** Análise e Desenvolvimento de Sistemas / Engenharia de Software / Ciência da Computação  
+**Curso:** Análise e Desenvolvimento de Sistemas  
+**GitHub:** [https://github.com/Joaopaulojpam/trabalho-api-uninter](https://github.com/Joaopaulojpam/trabalho-api-uninter)  
 
 ---
 

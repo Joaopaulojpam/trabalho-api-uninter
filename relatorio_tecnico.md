@@ -4,7 +4,7 @@
 **Centro Universitário Internacional UNINTER**  
 **Ano:** 2026  
 **Docentes:** Prof. Pedro Henrique Flores e Prof. Osmar Dias Jr.  
-**Estudante:** [Nome do Estudante]  
+**Estudante:** João Paulo Andrade  
 **RU:** [Número do RU]  
 **Curso:** Análise e Desenvolvimento de Sistemas / Engenharia de Software / Ciência da Computação  
 

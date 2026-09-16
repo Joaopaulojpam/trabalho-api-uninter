@@ -1,0 +1,289 @@
+{
+	"info": {
+		"_postman_id": "c85d89f2-234b-4f9e-a890-e71e98d1a1b1",
+		"name": "API Catálogo de Produtos e Categorias - UNINTER",
+		"description": "Coleção completa de requisições de teste para a Atividade Prática de Arquitetura e Desenvolvimento de APIs (UNINTER 2026).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		},
+		{
+			"key": "api_key",
+			"value": "uninter_segredo_api_2026",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "1. Sistema",
+			"item": [
+				{
+					"name": "Informações da API (Raiz)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/",
+							"host": ["{{base_url}}"],
+							"path": [""]
+						}
+					}
+				},
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/health",
+							"host": ["{{base_url}}"],
+							"path": ["health"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "2. Categorias",
+			"item": [
+				{
+					"name": "Listar Categorias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/categorias?skip=0&limit=20",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "categorias"],
+							"query": [
+								{ "key": "skip", "value": "0" },
+								{ "key": "limit", "value": "20" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Obter Categoria por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/categorias/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "categorias", "1"]
+						}
+					}
+				},
+				{
+					"name": "Criar Categoria (Autenticado)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "X-API-Key", "value": "{{api_key}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Games e Consoles\",\n  \"descricao\": \"Videogames, controles e mídias de jogos\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/categorias",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "categorias"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "3. Produtos (CRUD Principal)",
+			"item": [
+				{
+					"name": "GET - Listar Todos os Produtos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/produtos?skip=0&limit=20&apenas_ativos=true",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "produtos"],
+							"query": [
+								{ "key": "skip", "value": "0" },
+								{ "key": "limit", "value": "20" },
+								{ "key": "apenas_ativos", "value": "true" }
+							]
+						}
+					}
+				},
+				{
+					"name": "GET - Filtrar por Categoria e Preço",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/produtos?categoria_id=1&preco_min=100&preco_max=500",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "produtos"],
+							"query": [
+								{ "key": "categoria_id", "value": "1" },
+								{ "key": "preco_min", "value": "100" },
+								{ "key": "preco_max", "value": "500" }
+							]
+						}
+					}
+				},
+				{
+					"name": "GET - Busca Textual por Termo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/produtos?busca=Gamer",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "produtos"],
+							"query": [
+								{ "key": "busca", "value": "Gamer" }
+							]
+						}
+					}
+				},
+				{
+					"name": "GET - Consultar Produto por ID (200 OK)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/produtos/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "produtos", "1"]
+						}
+					}
+				},
+				{
+					"name": "GET - Consultar Produto Inexistente (404 Not Found)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/produtos/9999",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "produtos", "9999"]
+						}
+					}
+				},
+				{
+					"name": "POST - Criar Produto SEM Autenticação (401 Unauthorized)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"SSD NVMe 1TB\",\n  \"descricao\": \"Leitura de 3500MB/s\",\n  \"preco\": 429.90,\n  \"estoque\": 18,\n  \"codigo_sku\": \"INF-SSD-004\",\n  \"categoria_id\": 1,\n  \"ativo\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/produtos",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "produtos"]
+						}
+					}
+				},
+				{
+					"name": "POST - Criar Produto COM Autenticação (201 Created)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "X-API-Key", "value": "{{api_key}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"SSD NVMe 1TB PCIe 4.0\",\n  \"descricao\": \"SSD M.2 com velocidade de leitura de 5000MB/s\",\n  \"preco\": 459.90,\n  \"estoque\": 25,\n  \"codigo_sku\": \"INF-SSD-004\",\n  \"categoria_id\": 1,\n  \"ativo\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/produtos",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "produtos"]
+						}
+					}
+				},
+				{
+					"name": "POST - Validação de Dados Inválidos (422 Unprocessable Entity)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "X-API-Key", "value": "{{api_key}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"P\",\n  \"preco\": -50.00,\n  \"estoque\": -3,\n  \"codigo_sku\": \"\",\n  \"categoria_id\": 1,\n  \"ativo\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/produtos",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "produtos"]
+						}
+					}
+				},
+				{
+					"name": "PUT - Atualizar Produto Integralmente (200 OK)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "X-API-Key", "value": "{{api_key}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Mouse Gamer Ergonômico RGB Pro\",\n  \"descricao\": \"Sensor PixArt 3389 de 16.000 DPI com cabo paracord\",\n  \"preco\": 189.90,\n  \"estoque\": 40,\n  \"codigo_sku\": \"INF-MOU-001\",\n  \"categoria_id\": 1,\n  \"ativo\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/produtos/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "produtos", "1"]
+						}
+					}
+				},
+				{
+					"name": "PATCH - Atualizar Produto Parcialmente (200 OK)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "X-API-Key", "value": "{{api_key}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"preco\": 139.90,\n  \"estoque\": 60\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/produtos/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "produtos", "1"]
+						}
+					}
+				},
+				{
+					"name": "DELETE - Excluir Produto (204 No Content)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{ "key": "X-API-Key", "value": "{{api_key}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/produtos/7",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "produtos", "7"]
+						}
+					}
+				}
+			]
+		}
+	]
+}

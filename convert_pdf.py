@@ -188,6 +188,7 @@ def gerar_pdf():
         edge_exe,
         "--headless",
         "--disable-gpu",
+        "--no-pdf-header-footer",
         "--run-all-compositor-stages-before-draw",
         f"--print-to-pdf={abs_pdf}",
         f"file:///{abs_html.replace(os.sep, '/')}"

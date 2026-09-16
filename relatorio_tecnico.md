@@ -5,7 +5,7 @@
 **Ano:** 2026  
 **Docentes:** Prof. Pedro Henrique Flores e Prof. Osmar Dias Jr.  
 **Estudante:** João Paulo Andrade  
-**RU:** [Número do RU]  
+**RU:** 5180040  
 **Curso:** Análise e Desenvolvimento de Sistemas / Engenharia de Software / Ciência da Computação  
 
 ---
